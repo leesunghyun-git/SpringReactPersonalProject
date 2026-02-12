@@ -29,7 +29,7 @@ public class JwtProvider {
 		secret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtProperties.getSecret()));
 	}
 	
-	public String createRefreshToken(String username) {
+	public String createRefreshToken(String username,String provider) {
 		Date now = new Date();
 		Date expiry = new Date(
 			now.getTime()+jwtProperties.getRefreshTokenExpiration()
@@ -37,10 +37,29 @@ public class JwtProvider {
 		
 		return Jwts.builder()
 				.setSubject(username)
+				.claim("provider", provider)
 				.setIssuedAt(now)
 				.setExpiration(expiry)
 				.signWith(secret,SignatureAlgorithm.HS256)
 				.compact();
+	}
+	public String createAccessToken(String username,String provider,String role) {
+		Date now = new Date();
+		Date expiry = new Date(
+			now.getTime()+jwtProperties.getAccessTokenExpiration()
+		);
+		
+		return Jwts.builder()
+				.setSubject(username)
+				.claim("provider", provider)
+				.claim("role", role)
+				.setIssuedAt(now)
+				.setExpiration(expiry)
+				.signWith(secret,SignatureAlgorithm.HS256)
+				.compact();
+	}
+	public String getProvider(String token) {
+		return parseClaims(token).get("provider",String.class);
 	}
 	private Claims parseClaims(String token) {
 		return Jwts.parserBuilder()

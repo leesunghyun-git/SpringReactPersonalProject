@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.sist.web.config.CustomOAuth2User;
 import com.sist.web.entity.Member;
 import com.sist.web.repository.MemberRepository;
+import com.sist.web.repository.UserRoleRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CustomOAuth2UserService extends DefaultOAuth2UserService{
 	private final MemberRepository mRepo;
+	private final UserRoleRepository umRepo;
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 		OAuth2User oauth2user= super.loadUser(userRequest);
@@ -35,19 +37,15 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService{
 			username = (String)response.get("id");
 		}
 		// TODO Auto-generated method stub
-		List<String> authority = mRepo.userAuthoritiesByUsernameAndProvider(username, provider);
-		Collection<GrantedAuthority> authorities = authority.stream()
-				.map(auth -> new SimpleGrantedAuthority(auth))
-				.collect(Collectors.toList());
-		Member vo = new Member();
-		vo.setProvider(provider);
-		vo.setUsername(username);
-		
+
+		Member user = mRepo.findByUsernameAndProvider(username, provider).orElse(null);
+		String role = umRepo.findRoleNameByUserNameAndProvider(provider,username);
 		if(user==null)
 		{
-			return new CustomOAuth2User(oauth2user,provider,username,false,authorities);
+			return new CustomOAuth2User(oauth2user,provider,username,false,role);
 		}
-		return new CustomOAuth2User(oauth2user,provider,username,true,authorities);
+		
+		return new CustomOAuth2User(oauth2user,provider,username,true,role);
 	}
 		
 }

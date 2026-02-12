@@ -1,9 +1,11 @@
 package com.sist.web.config;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
@@ -12,7 +14,7 @@ public class CustomOAuth2User implements OAuth2User{
 	private final String provider;
 	private final String username;
 	private final boolean isRegistered;
-	private final Collection<? extends GrantedAuthority> authority;
+	private final String role;
 	
 	
 	@Override
@@ -24,7 +26,7 @@ public class CustomOAuth2User implements OAuth2User{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return authority;
+		return List.of(new SimpleGrantedAuthority(role));
 	}
 
 	@Override
@@ -43,6 +45,10 @@ public class CustomOAuth2User implements OAuth2User{
 
 	public boolean isRegistered() {
 		return isRegistered;
+	}
+	
+	public String getRole() {
+		return role;
 	}
 	
 }
