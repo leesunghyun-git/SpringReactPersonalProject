@@ -15,7 +15,7 @@ MSG longblob
 @EqualsAndHashCode(callSuper=false)
 public class AttractionDTO extends TravelDetailDTO{
 	private String infocenter;
-	private String resdate;
+	private String restdate;
 	private String usetime;
 	private String pakring;
 	private String msg;
