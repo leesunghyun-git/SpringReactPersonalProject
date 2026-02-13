@@ -33,6 +33,7 @@ public class SecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		http
 			.csrf(csrf->csrf.disable())
+			.cors(cors->cors.configurationSource(corsConfigurationSource()))
 			.sessionManagement(session -> 
 				session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(auth -> auth
@@ -40,14 +41,13 @@ public class SecurityConfig {
 					.anyRequest().permitAll()
 			)
 			.oauth2Login(ouath2 -> ouath2
-			.loginPage("/mebmer/login")
+			.loginProcessingUrl("/mebmer/social/login")
 			.userInfoEndpoint(userInfo -> userInfo
 					.userService(oauth2UserService))
 			.successHandler(loginSuccessHandler)
 			)
 			.formLogin(form -> form
-					.loginPage("/member/local/login")
-					.loginProcessingUrl("/member/login_process")
+					.loginProcessingUrl("/member/local/login")
 					.usernameParameter("username")
 					.passwordParameter("password")
 					.successHandler(loginSuccessHandler)

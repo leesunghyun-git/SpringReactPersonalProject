@@ -10,6 +10,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.sist.web.dto.AttractionDTO;
+import com.sist.web.dto.CultureDTO;
+import com.sist.web.dto.FestivalDTO;
+import com.sist.web.dto.FoodStoreDTO;
+import com.sist.web.dto.ShoppingDTO;
+import com.sist.web.dto.StayDTO;
 import com.sist.web.dto.TravelListDTO;
 import com.sist.web.entity.BusanTravel;
 @Repository
@@ -33,7 +38,7 @@ public interface BusanTravelRepository extends JpaRepository<BusanTravel, Intege
 	private String msg;
 	 */
 	@Query(value="SELECT title,image1,x,y,b.contentid,addresss,contenttype,hit,infocenter,restdate,usertime,parking,msg FROM BusanTravel b JOIN Attraction a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
-	AttractionDTO buanAttrDetail(@Param("contentid")int contentid);
+	AttractionDTO busanAttrDetail(@Param("contentid")int contentid);
 	/*
 	 * 
 	 *  * NO bigint 
@@ -48,4 +53,59 @@ RESTDATE varchar(1024)
 PARKING varchar(1024) 
 MSG longblob
 	 */
+	@Query(value="SELECT title,image1,x,y,b.contentid,addresss,contenttype,hit,usefee,spendtime,parkingfee,discountinfo,infocenter,usetime,restdate,parking,msg FROM BusanTravel b JOIN culture a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	CultureDTO busanCultDetail(@Param("contentid")int contentid);
+	
+	/*
+	 * 	private String eventstartdate;
+	private String eventenddate;
+	private String agelimit;
+	private String playtime;
+	private String eventplace;
+	private String eventhomepage;
+	private String usetime;
+	private String spendtime;
+	private String msg;
+	 */
+	@Query(value="SELECT title,image1,x,y,b.contentid,addresss,contenttype,hit,eventstartdate,eventenddate,agelimit,palytime,eventplace,eventhomepage,usetime,spendtime,msg FROM BusanTravel b JOIN Festival a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	FestivalDTO busanFesDetail(@Param("contentid")int contentid);
+	/*
+	 * 	private String saleitem;
+	private String saleitemcost;
+	private String fairday;
+	private String infocenter;
+	private String restdate;
+	private String parking;
+	private String opentime;
+	private String msg;
+	 */
+	@Query(value="SELECT title,image1,x,y,b.contentid,addresss,contenttype,hit,saleitem,saleitemcost,fairday,infocenter,restdate,parking,opentime,msg FROM BusanTravel b JOIN Shopping a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	ShoppingDTO busanShopDetail(@Param("contentid")int contentid);
+	
+	/*
+	 * 	private String roomtype;
+	private String checkingtime;
+	private String checkouttime;
+	private String chkcooking;
+	private String subfacility;
+	private String foodplace;
+	private String reservationurl;
+	private String infocenter;
+	private String parking;
+	private String msg;
+	 */
+	@Query(value="SELECT title,image1,x,y,b.contentid,addresss,contenttype,hit,roomtype,checkingtime,checkouttime,chkcooking,subfacility,foodplace,reservationurl,infocen,msg FROM BusanTravel b JOIN Stay a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	StayDTO busanStayDetail(@Param("contentid")int contentid);
+	/*
+	 * 	private String firstmenu;
+	private String treatmenu;
+	private String infocenter;
+	private String parking;
+	private String opendate;
+	private String opentime;
+	private String restdate;
+	private String msg;
+	 */
+	@Query(value="SELECT title,image1,x,y,b.contentid,addresss,contenttype,hit,firstmenu,treatmenu,infocenter,parking,opendate,opentime,restdate,msg FROM BusanTravel b JOIN FoodStore a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	FoodStoreDTO busanFoodDetail(@Param("contentid")int contentid);
 }

@@ -38,6 +38,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 						""".formatted(
 								ouathUser.getUsername(),
 								ouathUser.getProvider()));
+				response.sendRedirect("http://localhost:3000/login/callback");
 				return;
 			}
 			else {
@@ -56,6 +57,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 						""".formatted(
 								accessToken,
 								refreshToken));
+				response.sendRedirect("http://localhost:3000/login/callback");
 				return;
 			}
 		}
@@ -74,6 +76,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 					""".formatted(
 							accessToken,
 							refreshToken));
+			response.sendRedirect("http://localhost:3000/login/callback");
 			return;
 		}
 		
