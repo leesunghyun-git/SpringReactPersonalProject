@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class TravelRestController {
 	private final TravelService tService;
 	
-	@GetMapping("/{region}/list_react/{contenttype}/{page}")
+	@GetMapping("/{region}/list/{contenttype}/{page}")
 	public ResponseEntity<Map> travel_list(@PathVariable("region")String region,@PathVariable("page")int page,@PathVariable("contenttype")int contenttype)
 	{
 		Map map =new HashMap();
@@ -54,7 +54,7 @@ public class TravelRestController {
 		38
 		39
 	 */
-	@GetMapping("/{region}/detail_react/{contenttype}/{contentid}")
+	@GetMapping("/{region}/detail/{contenttype}/{contentid}")
 	public ResponseEntity<Map> travel_detail(@PathVariable("region")String region,@PathVariable("contentid")int contentid,@PathVariable("contenttype")int contenttype)
 	{
 		Map map =new HashMap();

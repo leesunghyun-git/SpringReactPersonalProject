@@ -20,7 +20,7 @@ public interface JejuTravelRepository extends JpaRepository<JejuTravel, Integer>
 	@Query("SELECT new com.sist.web.dto.TravelListDTO(b.title, b.image1, b.contentid, b.address, b.contenttype, b.hit) FROM JejuTravel b WHERE b.contenttype = :contenttype ORDER BY b.contentid ASC")
 	Page<TravelListDTO> JejuListData(@Param("contenttype")int contenttype,Pageable pageable);
 
-	@Query(value="SELECT title,image1,x,y,b.contentid,addresss,contenttype,hit,infocenter,restdate,usertime,parking,msg FROM jejuTravel b JOIN Attraction a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,infocenter,restdate,usertime,parking,msg FROM jejuTravel b JOIN Attraction a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
 	AttractionDTO jejuAttrDetail(@Param("contentid")int contentid);
 	/*
 	 * 
@@ -36,7 +36,7 @@ RESTDATE varchar(1024)
 PARKING varchar(1024) 
 MSG longblob
 	 */
-	@Query(value="SELECT title,image1,x,y,b.contentid,addresss,contenttype,hit,usefee,spendtime,parkingfee,discountinfo,infocenter,usetime,restdate,parking,msg FROM jejuTravel b JOIN culture a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,usefee,spendtime,parkingfee,discountinfo,infocenter,usetime,restdate,parking,msg FROM jejuTravel b JOIN culture a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
 	CultureDTO jejuCultDetail(@Param("contentid")int contentid);
 	
 	/*
@@ -50,7 +50,7 @@ MSG longblob
 	private String spendtime;
 	private String msg;
 	 */
-	@Query(value="SELECT title,image1,x,y,b.contentid,addresss,contenttype,hit,eventstartdate,eventenddate,agelimit,palytime,eventplace,eventhomepage,usetime,spendtime,msg FROM jejuTravel b JOIN festival a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,eventstartdate,eventenddate,agelimit,palytime,eventplace,eventhomepage,usetime,spendtime,msg FROM jejuTravel b JOIN festival a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
 	FestivalDTO jejuFesDetail(@Param("contentid")int contentid);
 	/*
 	 * 	private String saleitem;
@@ -62,7 +62,7 @@ MSG longblob
 	private String opentime;
 	private String msg;
 	 */
-	@Query(value="SELECT title,image1,x,y,b.contentid,addresss,contenttype,hit,saleitem,saleitemcost,fairday,infocenter,restdate,parking,opentime,msg FROM jejuTravel b JOIN shopping a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,saleitem,saleitemcost,fairday,infocenter,restdate,parking,opentime,msg FROM jejuTravel b JOIN shopping a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
 	ShoppingDTO jejuShopDetail(@Param("contentid")int contentid);
 	
 	/*
@@ -77,9 +77,9 @@ MSG longblob
 	private String parking;
 	private String msg;
 	 */
-	@Query(value="SELECT title,image1,x,y,b.contentid,addresss,contenttype,hit,roomtype,checkingtime,checkouttime,chkcooking,subfacility,foodplace,reservationurl,infocenter,parking,msg FROM jejuTravel b JOIN stay a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,roomtype,checkingtime,checkouttime,chkcooking,subfacility,foodplace,reservationurl,infocenter,parking,msg FROM jejuTravel b JOIN stay a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
 	StayDTO jejuStayDetail(@Param("contentid")int contentid);
 	
-	@Query(value="SELECT title,image1,x,y,b.contentid,addresss,contenttype,hit,firstmenu,treatmenu,infocenter,parking,opendate,opentime,restdate,msg FROM jejuTravel b JOIN FoodStore a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,firstmenu,treatmenu,infocenter,parking,opendate,opentime,restdate,msg FROM jejuTravel b JOIN FoodStore a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
 	FoodStoreDTO jejuFoodDetail(@Param("contentid")int contentid);
 }

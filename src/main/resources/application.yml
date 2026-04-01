@@ -3,8 +3,8 @@ server:
 
 spring:
   datasource: 
-    url: jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC
-    username: root
+    url: jdbc:mysql://221.165.65.188:3306/mydb?serverTimezone=UTC
+    username: sunghyun
     password: vavavo97*
     driver-class-name: com.mysql.cj.jdbc.Driver
   security:
