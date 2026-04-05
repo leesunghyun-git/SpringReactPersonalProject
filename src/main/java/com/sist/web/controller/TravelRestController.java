@@ -16,6 +16,15 @@ import com.sist.web.service.*;
 import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
+/*
+contenttype
+12 = attraction (관광명소)
+14 = culture (문화시설)
+15 = Festival (축제/행사)
+32 = stay (숙박)
+38 = shopping(쇼핑)
+39 = foodStore (음식점)
+ */
 public class TravelRestController {
 	private final TravelService tService;
 	
@@ -99,5 +108,30 @@ public class TravelRestController {
 		}
 		
 		return new ResponseEntity<>(map,HttpStatus.OK);
+	}
+	@GetMapping("/home/data")
+	public ResponseEntity<Map> home_data(){
+		Map map = new HashMap();
+
+		try{
+			List sList = tService.seoulHomeData();
+			List bList = tService.busanHomeData();
+			List gList = tService.gyeongjuHomeData();
+			List jList = tService.jejuHomeData();
+			/*System.out.println(sList);*/
+			map.put("sList",sList);
+			map.put("bList",bList);
+			map.put("gList",gList);
+			map.put("jList",jList);
+
+
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+
+		return new ResponseEntity<Map>(map,HttpStatus.OK);
+
 	}
 }

@@ -200,4 +200,25 @@ public class TravelServiceImpl implements TravelService{
 		}
 		return dto;
 	}
+
+	@Override
+	public List<TravelListDTO> busanHomeData() {
+		return bRepo.busanHomeData();
+	}
+
+	@Override
+	public List<TravelListDTO> seoulHomeData() {
+		return sRepo.seoulHomeData();
+	}
+
+	@Override
+	public List<TravelListDTO> jejuHomeData() {
+		return jRepo.jejuHomeData();
+	}
+
+	@Override
+	public List<TravelListDTO> gyeongjuHomeData() {
+		return gRepo.gyeongjuHomeData();
+	}
+
 }

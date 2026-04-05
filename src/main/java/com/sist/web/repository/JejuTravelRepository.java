@@ -15,8 +15,14 @@ import com.sist.web.dto.ShoppingDTO;
 import com.sist.web.dto.StayDTO;
 import com.sist.web.dto.TravelListDTO;
 import com.sist.web.entity.JejuTravel;
+
+import java.util.List;
+
 @Repository
 public interface JejuTravelRepository extends JpaRepository<JejuTravel, Integer>{
+	@Query(value="SELECT title,image1,contentid,address,contenttype,hit FROM jejutravel ORDER BY hit desc LIMIT 4",nativeQuery = true)
+	List<TravelListDTO> jejuHomeData();
+
 	@Query("SELECT new com.sist.web.dto.TravelListDTO(b.title, b.image1, b.contentid, b.address, b.contenttype, b.hit) FROM JejuTravel b WHERE b.contenttype = :contenttype ORDER BY b.contentid ASC")
 	Page<TravelListDTO> JejuListData(@Param("contenttype")int contenttype,Pageable pageable);
 

@@ -14,4 +14,8 @@ public interface TravelService {
 	FoodStoreDTO travelFoodData(String region,int contentid);
 	ShoppingDTO travelShopData(String region,int contentid);
 	StayDTO travelStayData(String region,int contentid);
+	List<TravelListDTO> busanHomeData();
+	List<TravelListDTO> seoulHomeData();
+	List<TravelListDTO> jejuHomeData();
+	List<TravelListDTO> gyeongjuHomeData();
 }

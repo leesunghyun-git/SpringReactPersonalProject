@@ -19,6 +19,9 @@ import com.sist.web.dto.TravelListDTO;
 import com.sist.web.entity.BusanTravel;
 @Repository
 public interface BusanTravelRepository extends JpaRepository<BusanTravel, Integer>{
+	@Query(value="SELECT title,image1,contentid,address,contenttype,hit FROM busantravel ORDER BY hit desc LIMIT 4",nativeQuery = true)
+	List<TravelListDTO> busanHomeData();
+
 	@Query("SELECT new com.sist.web.dto.TravelListDTO(b.title, b.image1, b.contentid, b.address, b.contenttype, b.hit) FROM BusanTravel b WHERE b.contenttype = :contenttype ORDER BY b.contentid ASC")
 	Page<TravelListDTO> busanListData(@Param("contenttype")int contenttype,Pageable pageable);
 	/*
