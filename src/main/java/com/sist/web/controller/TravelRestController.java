@@ -68,6 +68,7 @@ public class TravelRestController {
 	{
 		Map map =new HashMap();
 		try {
+			System.out.println(region);
 			switch (contenttype) {
 			case(12) : {
 				AttractionDTO dto = tService.travelAttrData(region, contentid);

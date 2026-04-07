@@ -161,16 +161,20 @@ public class TravelServiceImpl implements TravelService{
 		ShoppingDTO dto = null;
 		switch (region) {
 		case "seoul": {
-			dto=sRepo.seoulShopDetail(contentid);	
+			dto=sRepo.seoulShopDetail(contentid);
+			break;
 		}
 		case "busan": {
 			dto=bRepo.busanShopDetail(contentid);
+			break;
 		}
 		case "gyeongju": {
 			dto=gRepo.gyeongjuShopDetail(contentid);
+			break;
 		}
 		case "jeju": {
 			dto=jRepo.jejuShopDetail(contentid);
+			break;
 		}
 		}
 		return dto;
