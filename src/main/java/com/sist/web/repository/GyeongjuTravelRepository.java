@@ -25,7 +25,7 @@ public interface GyeongjuTravelRepository extends JpaRepository<GyeongjuTravel, 
 	@Query("SELECT new com.sist.web.dto.TravelListDTO(b.title, b.image1, b.contentid, b.address, b.contenttype, b.hit) FROM GyeongjuTravel b WHERE b.contenttype = :contenttype ORDER BY b.contentid ASC")
 	Page<TravelListDTO> gyeongjuListData(@Param("contenttype")int contenttype,Pageable pageable);
 	
-	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,infocenter,restdate,usertime,parking,msg FROM gyeongjuTravel b JOIN Attraction a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,infocenter,restdate,usetime,parking,msg FROM gyeongjuTravel b JOIN Attraction a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
 	AttractionDTO gyeongjuAttrDetail(@Param("contentid")int contentid);
 	/*
 	 * 
@@ -55,7 +55,7 @@ MSG longblob
 	private String spendtime;
 	private String msg;
 	 */
-	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,eventstartdate,eventenddate,agelimit,palytime,eventplace,eventhomepage,usetime,spendtime,msg FROM gyeongjuTravel b JOIN festival a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,eventstartdate,eventenddate,agelimit,playtime,eventplace,eventhomepage,usetime,spendtime,msg FROM gyeongjuTravel b JOIN festival a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
 	FestivalDTO gyeongjuFesDetail(@Param("contentid")int contentid);
 	/*
 	 * 	private String saleitem;
@@ -72,7 +72,7 @@ MSG longblob
 	
 	/*
 	 * 	private String roomtype;
-	private String checkingtime;
+	private String checkintime;
 	private String checkouttime;
 	private String chkcooking;
 	private String subfacility;
@@ -82,9 +82,9 @@ MSG longblob
 	private String parking;
 	private String msg;
 	 */
-	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,roomtype,checkingtime,checkouttime,chkcooking,subfacility,foodplace,reservationurl,infocenter,parking,msg FROM gyeongjuTravel b JOIN stay a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,roomtype,checkintime,checkouttime,chkcooking,subfacility,foodplace,reservationurl,infocenter,parking,msg FROM gyeongjuTravel b JOIN stay a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
 	StayDTO gyeongjuStayDetail(@Param("contentid")int contentid);
 	
-	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,firstmenu,treatmenu,infocenter,parking,opendate,opentime,restdate,msg FROM geyongjuTravel b JOIN FoodStore a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
+	@Query(value="SELECT title,image1,x,y,b.contentid,address,contenttype,hit,firstmenu,treatmenu,infocenter,parking,opendate,opentime,restdate,msg FROM gyeongjuTravel b JOIN FoodStore a ON b.contentid = a.contentid WHERE b.contentid = :contentid",nativeQuery = true)
 	FoodStoreDTO gyeongjuFoodDetail(@Param("contentid")int contentid);
 }

@@ -106,7 +106,7 @@ public class TravelRestController {
 			ex.printStackTrace();
 			return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+		System.out.println(map);
 		return new ResponseEntity<>(map,HttpStatus.OK);
 	}
 	@GetMapping("/home/data")
